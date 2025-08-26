@@ -1,0 +1,890 @@
+-Elaborado por Fred Fernandez para la UNSAAC tesis de grado 25-04-25
+	Simulacion CFD+FEA)FSI de la planta de agua potable La Pastora
+		-Malla de 4 cm para todo, menos para la parte de mezcla rapida 2cm
+		-Unidades en SI
+		-Agua a T - 26C
+		-Modelo kw - k omega RANS
+		-Gravedad -9.81m/s2
+		-Numero de celdas 2336969
+		-Tiempo de simlacion 130
+		-Flujo incompresible
+
+ &xput
+    remark='!! Remarks beginning with "!! " are automatically added and removed by FLOW-3D.',
+    remark='!! Do not begin any user added remarks with with "!! ". They will be removed',
+    twfin=140,
+    itb=1,
+    ifvisc=1,
+    ifvis=5,
+    imphtc=0,
+    ifdynconv=1,
+    gy=-9.81,
+    ivort=1,
+    idpth=1,
+    istnr=1,
+    ifmu=1,
+    iscpot=1,
+    ifsiout=3,
+    iexodusout=3,
+    fsi_memory=20,
+    tedit(1)=0,
+    tpltd(1)=20,
+    tapltd(1)=1,
+ /
+
+ &limits
+ /
+
+ &props
+    units='si',
+    tunits='c',
+    pcav=0,
+    mu1=0.001,
+    cangle=-90,
+    fluid1='Water at 26 C',
+    muctst=0.001,
+    cv1=4182,
+    tl1=0.1,
+    ts1=0,
+    clht1=3.35e+05,
+    cvs1=2100,
+    thcs1=2.215,
+    rhofs=917,
+    tsdrg=1,
+    fscr=1,
+    fsco=0,
+    rhof=996.9,
+    sigma=0.073,
+    yieldt1=0,
+    mus=0,
+    thc1=0.597,
+    yield1=-1,
+ /
+
+ &scalar
+    ipath=1,
+    asqr=0,
+    pgasmp=0,
+ /
+
+ &PCAP
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=11,
+    flrbct(1, 3)=0.28,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='01',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=0.35,
+    nxcell(1)=19,
+    px(2)=2.3,
+
+    py(1)=0.3,
+    nycell(1)=55,
+    py(2)=5.79,
+    nycell(2)=11,
+    py(3)=6.85,
+
+    pz(1)=0.35,
+    nzcell(1)=18,
+    pz(2)=2.1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='02',
+    ntotal=1000,
+    size=0.05,
+
+    px(1)=2.3,
+    nxcell(1)=66,
+    px(2)=5.6,
+
+    py(1)=5.79,
+    nycell(1)=22,
+    py(2)=6.85,
+
+    pz(1)=0.35,
+    nzcell(1)=36,
+    pz(2)=2.1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='03',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=5.6,
+    nxcell(1)=20,
+    px(2)=7.63,
+
+    py(1)=5.79,
+    nycell(1)=11,
+    py(2)=6.85,
+
+    pz(1)=0.35,
+    nzcell(1)=18,
+    pz(2)=2.1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='04',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=7.63,
+    nxcell(1)=10,
+    px(2)=8.67,
+
+    py(1)=5.79,
+    nycell(1)=11,
+    py(2)=6.85,
+
+    pz(1)=0,
+    nzcell(1)=3,
+    pz(2)=0.35,
+    nzcell(2)=18,
+    pz(3)=2.1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='05',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=7.63,
+    nxcell(1)=20,
+    px(2)=8.67,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.05,
+    nzcell(1)=140,
+    pz(2)=0,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='06',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=6.2,
+    nxcell(1)=22,
+    px(2)=7.33,
+    nxcell(2)=5,
+    px(3)=7.63,
+    nxcell(3)=20,
+    px(4)=8.67,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.9,
+    nzcell(1)=16,
+    pz(2)=-7.05,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='07',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=6.2,
+    nxcell(1)=22,
+    px(2)=7.33,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.05,
+    nzcell(1)=128,
+    pz(2)=-0.85,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='08',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=4.56,
+    nxcell(1)=26,
+    px(2)=5.9,
+    nxcell(2)=5,
+    px(3)=6.2,
+    nxcell(3)=22,
+    px(4)=7.33,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-0.85,
+    nzcell(1)=16,
+    pz(2)=0,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='09',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=4.56,
+    nxcell(1)=26,
+    px(2)=5.9,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.05,
+    nzcell(1)=128,
+    pz(2)=-0.85,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='10',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=2.61,
+    nxcell(1)=32,
+    px(2)=4.24,
+    nxcell(2)=6,
+    px(3)=4.56,
+    nxcell(3)=26,
+    px(4)=5.9,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.9,
+    nzcell(1)=16,
+    pz(2)=-7.05,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='11',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=2.61,
+    nxcell(1)=32,
+    px(2)=4.24,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.05,
+    nzcell(1)=128,
+    pz(2)=-0.85,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='12',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=0.31,
+    nxcell(1)=40,
+    px(2)=2.29,
+    nxcell(2)=6,
+    px(3)=2.61,
+    nxcell(3)=32,
+    px(4)=4.24,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-0.85,
+    nzcell(1)=16,
+    pz(2)=0,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=2,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='13',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=0.31,
+    nxcell(1)=40,
+    px(2)=2.29,
+
+    py(1)=1.66,
+    nycell(1)=44,
+    py(2)=3.9,
+    nycell(2)=36,
+    py(3)=5.79,
+    nycell(3)=22,
+    py(4)=6.85,
+
+    pz(1)=-7.9,
+    nzcell(1)=140,
+    pz(2)=-0.85,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ibct(1)=2,
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='14',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=0.31,
+    nxcell(1)=20,
+    px(2)=2.29,
+    nxcell(2)=3,
+    px(3)=2.6,
+
+    py(1)=4.01,
+    nycell(1)=18,
+    py(2)=5.79,
+    nycell(2)=11,
+    py(3)=6.85,
+
+    pz(1)=-9.2,
+    nzcell(1)=10,
+    pz(2)=-8.2,
+    nzcell(2)=3,
+    pz(3)=-7.9,
+    if_mesh_enabled=1,
+ /
+
+ &BCDATA
+    remark='!! Boundary condition X Min',
+    ihtbct(1)=0,
+
+    remark='!! Boundary condition X Max',
+    ibct(2)=8,
+    ihtbct(2)=0,
+
+    remark='!! Boundary condition Y Min',
+    ibct(3)=2,
+    ihtbct(3)=0,
+
+    remark='!! Boundary condition Y Max',
+    ibct(4)=5,
+    fbct(1, 4)=0,
+    ihtbct(4)=0,
+
+    remark='!! Boundary condition Z Min',
+    ibct(5)=2,
+    ihtbct(5)=0,
+
+    remark='!! Boundary condition Z Max',
+    ibct(6)=2,
+    ihtbct(6)=0,
+ /
+
+ &MESH
+    MeshName='15',
+    ntotal=1000,
+    size=0.1,
+
+    px(1)=2.6,
+    nxcell(1)=56,
+    px(2)=8.3,
+
+    py(1)=4.01,
+    nycell(1)=18,
+    py(2)=5.79,
+    nycell(2)=11,
+    py(3)=6.85,
+
+    pz(1)=-9.2,
+    nzcell(1)=10,
+    pz(2)=-8.2,
+    if_mesh_enabled=1,
+ /
+
+ &obs
+    nobs=1,
+
+    remark='!! Component 1',
+    obsid(1)='geometria',
+
+    remark='!! Subcomponent 1',
+    iob(1)=1,
+    subcmpid(1)='FR-floculadores',
+    igen(1)=3,
+    fstl(1)='final_c.stl',
+
+    remark='!! Component 1 properties',
+    ilthobs(1)=0,
+    ifsi(1)=1,
+    iffem(1)=1,
+    ffem(1)='comp1.09.FEmesh',
+    thexobs(1)=1e-05,
+    rhobs(1)=2400,
+    shrmod(1)=9.28e+09,
+    elastmod(1)=2.134e+10,
+    poissonr(1)=0.15,
+
+    remark='!! Component common parameters',
+    avrck=-3.1,
+ /
+
+ &fl
+    nfls=3,
+
+    remark='!! FluidRegion 1',
+    fxl(1)=0.3,
+    fxh(1)=2.3,
+    fyh(1)=6,
+    fzl(1)=0.3,
+    fzh(1)=2.1,
+
+    remark='!! FluidRegion 2',
+    fxl(2)=0.3,
+    fyl(2)=1.6,
+    fyh(2)=5.78,
+    fzl(2)=-7.9,
+    fzh(2)=0,
+
+    remark='!! FluidRegion 3',
+    fxl(3)=4,
+    fxh(3)=8.6,
+    fyl(3)=5.7,
+    fyh(3)=6.1,
+    fzl(3)=0.3,
+
+    remark='!! Region Pointer common parameters',
+    iflinittyp=0,
+ /
+
+ &bf
+ /
+
+ &motn
+ /
+
+ &grafic
+    anmtyp(1)='dpth',
+    anmtyp(2)='f',
+    anmtyp(3)='fsi',
+    anmtyp(4)='p',
+    anmtyp(5)='path',
+    anmtyp(6)='scrpot',
+    anmtyp(7)='stnr',
+    anmtyp(8)='turb',
+    anmtyp(9)='vel',
+    anmtyp(10)='vort',
+ /
+
+ &RENDERSPACE
+    iff3d(1)=1,
+ /
+
+ &HEADER
+    project='09',
+    version='double',
+    nprocs=0,
+ /
+
+ &parts
+ /
+    Documentation: general comments, background, expectations, etc.
+
+#start tables:
+#end start tables
